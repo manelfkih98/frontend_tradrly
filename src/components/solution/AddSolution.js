@@ -12,7 +12,8 @@ import { useForm } from "react-hook-form";
 import { useSelector, useDispatch } from "react-redux";
 
 import { fetchDepartments } from "../../services/departService";
-function AddSolution({ open, handleClose, handleSubmit, editingSolution }) {
+function AddSolution({ open, handleClose, onSubmitSolution, editingSolution }) {
+  
   const dispatch = useDispatch();
   const { departments } = useSelector((state) => state.departments);
 
@@ -39,13 +40,14 @@ function AddSolution({ open, handleClose, handleSubmit, editingSolution }) {
     dispatch(fetchDepartments());
   }, [editingSolution, setValue, reset, dispatch]);
 
-  // Soumettre le formulaire
   const handleFormSubmit = (data) => {
-    handleSubmit(data);
+    onSubmitSolution(data);
     console.log(data);
     reset();
     handleClose();
   };
+  
+
 
   return (
     <Dialog open={open} onClose={handleClose} fullWidth>

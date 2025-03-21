@@ -8,6 +8,7 @@ import Solution from "./pages/solution";
 import OffreStage from "./pages/offreStage";
 import OffreEmploi from "./pages/offreEmploi";
 import Question  from "./pages/question";
+import Posts from "./pages/posts";
 
 
 const App = () => {
@@ -24,6 +25,7 @@ const App = () => {
             <Route path="/offre/stage" element={<OffreStage />} />
             <Route path="/offre/emploi" element={<OffreEmploi />} />
            <Route path="/Question" element={<Question/>} />
+           <Route path="/post" element={<Posts/>} />
           </Routes>
         </Box>
       </Box>

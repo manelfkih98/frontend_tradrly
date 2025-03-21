@@ -1,22 +1,41 @@
 import React, { useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
-import { fetchDepartments, deleteDepartments, createDepartment, updateDepartment } from "../../services/departService";
-import { Table, TableHead, TableBody, TableRow, TableCell, TableContainer, Paper, CircularProgress, Typography, Card, IconButton, Button, TextField } from "@mui/material";
+import {
+  fetchSolutions,
+  deleteSolutions,
+  createSolution,
+  updateSolution
+} from "../../services/solutionService";
+import {
+  Table,
+  TableHead,
+  TableBody,
+  TableRow,
+  TableCell,
+  TableContainer,
+  Paper,
+  CircularProgress,
+  Typography,
+  Card,
+  IconButton,
+  Button,
+  TextField,
+} from "@mui/material";
 import DeleteIcon from "@mui/icons-material/Delete";
 import EditIcon from "@mui/icons-material/Edit";
 import Swal from "sweetalert2";
-import AddDepartement from "./AddSolution";
+import AddSolution from "./AddSolution";
 
-function ListesDepartement() {
+function ListesSolution() {
   const dispatch = useDispatch();
-  const { departments, loading, error } = useSelector((state) => state.departments);
+  const { projects, loading, error } = useSelector((state) => state.projects);
 
   const [open, setOpen] = useState(false);
-  const [editingDepartment, setEditingDepartment] = useState(null);
+  const [editingProject, setEditingProject] = useState(null);
   const [searchTerm, setSearchTerm] = useState("");
 
   useEffect(() => {
-    dispatch(fetchDepartments());
+    dispatch(fetchSolutions());
   }, [dispatch]);
 
   const handleDelete = (id) => {
@@ -31,11 +50,11 @@ function ListesDepartement() {
       cancelButtonText: "Annuler",
     }).then((result) => {
       if (result.isConfirmed) {
-        dispatch(deleteDepartments(id));
+        dispatch(deleteSolutions(id));
         Swal.fire({
           position: "top-end",
           icon: "success",
-          title: "Département supprimé avec succès",
+          title: "Projet supprimé avec succès",
           showConfirmButton: false,
           timer: 1000,
         });
@@ -43,42 +62,54 @@ function ListesDepartement() {
     });
   };
 
-  const handleEdit = (department) => {
-    setEditingDepartment(department);
+  const handleFormSubmit = (data) => {
+    if (editingProject) {
+      dispatch(updateSolution(editingProject._id, data));
+    } else {
+      dispatch(createSolution(data));
+    }
+    handleClose();
+  };
+
+  const handleEdit = (project) => {
+    setEditingProject(project);
     setOpen(true);
   };
 
   const handleOpen = () => {
-    setEditingDepartment(null);
+    setEditingProject(null);
     setOpen(true);
   };
 
   const handleClose = () => {
     setOpen(false);
-    setEditingDepartment(null);
+    setEditingProject(null);
   };
 
-  const handleAddOrUpdateDepartment = (departmentData) => {
-    if (editingDepartment) {
-      dispatch(updateDepartment(editingDepartment._id, departmentData));
-    } else {
-      dispatch(createDepartment(departmentData));
-    }
-    setOpen(false);
-  };
-
-  const filteredDepartments = departments.filter((dep) =>
-    dep.NameDep.toLowerCase().includes(searchTerm.toLowerCase()) ||
-    (dep.DescrpDetp && dep.DescrpDetp.toLowerCase().includes(searchTerm.toLowerCase()))
+  const filteredProjects = projects.filter(
+    (project) =>
+      (project.name_project &&
+        project.name_project
+          .toLowerCase()
+          .includes(searchTerm.toLowerCase())) ||
+      (project.description_project &&
+        project.description_project
+          .toLowerCase()
+          .includes(searchTerm.toLowerCase()))
   );
 
   return (
     <Card sx={{ p: 8 }}>
-      <Button variant="contained" color="primary" onClick={handleOpen} sx={{ marginBottom: 2 }}>
-        Ajouter un project
+      <Button
+        variant="contained"
+        color="primary"
+        onClick={handleOpen}
+        sx={{ marginBottom: 2 }}
+      >
+        Ajouter un projet
       </Button>
       <TextField
-        label="Rechercher project"
+        label="Rechercher projet"
         variant="outlined"
         fullWidth
         sx={{ marginBottom: 2 }}
@@ -87,7 +118,7 @@ function ListesDepartement() {
       />
       <TableContainer component={Paper}>
         <Typography variant="h6" sx={{ marginBottom: 2, textAlign: "center" }}>
-          Liste des Départements
+          Liste des projets
         </Typography>
 
         {loading ? (
@@ -100,22 +131,43 @@ function ListesDepartement() {
           <Table>
             <TableHead>
               <TableRow sx={{ backgroundColor: "#f5f5f5" }}>
-                <TableCell><strong>Nom Département</strong></TableCell>
-                <TableCell><strong>Description</strong></TableCell>
-                <TableCell><strong>Actions</strong></TableCell>
+                <TableCell>
+                  <strong>Nom du Projet</strong>
+                </TableCell>
+                <TableCell>
+                  <strong>Description du Projet</strong>
+                </TableCell>
+                <TableCell>
+                  <strong>department</strong>
+                </TableCell>
+                <TableCell>
+                  <strong>Actions</strong>
+                </TableCell>
               </TableRow>
             </TableHead>
             <TableBody>
-              {filteredDepartments.length > 0 ? (
-                filteredDepartments.map((dep) => (
-                  <TableRow key={dep._id}>
-                    <TableCell>{dep.NameDep}</TableCell>
-                    <TableCell>{dep.DescrpDetp}</TableCell>
+              {filteredProjects.length > 0 ? (
+                filteredProjects.map((project) => (
+                  <TableRow key={project._id}>
+                    <TableCell>{project.name_project}</TableCell>
+                    <TableCell>{project.description_project}</TableCell>
                     <TableCell>
-                      <IconButton onClick={() => handleEdit(dep)} color="primary">
+                      {project.departementId
+                        ? project.departementId.NameDep
+                        : "Département non disponible"}
+                    </TableCell>
+
+                    <TableCell>
+                      <IconButton
+                        onClick={() => handleEdit(project)}
+                        color="primary"
+                      >
                         Modifier <EditIcon />
                       </IconButton>
-                      <IconButton onClick={() => handleDelete(dep._id)} color="error">
+                      <IconButton
+                        onClick={() => handleDelete(project._id)}
+                        color="error"
+                      >
                         Supprimer <DeleteIcon />
                       </IconButton>
                     </TableCell>
@@ -124,7 +176,7 @@ function ListesDepartement() {
               ) : (
                 <TableRow>
                   <TableCell colSpan={3} align="center">
-                    Aucun département trouvé.
+                    Aucun projet trouvé.
                   </TableCell>
                 </TableRow>
               )}
@@ -133,14 +185,14 @@ function ListesDepartement() {
         )}
       </TableContainer>
 
-      <AddDepartement
+      <AddSolution
         open={open}
         handleClose={handleClose}
-        handleSubmit={handleAddOrUpdateDepartment}
-        editingDepartment={editingDepartment}
+        onSubmitSolution={handleFormSubmit}
+        editingSolution={editingProject}
       />
     </Card>
   );
 }
 
-export default ListesDepartement;
+export default ListesSolution;

@@ -1,19 +1,10 @@
-const Posts = () =>
-            {
-                return(
+import AllPost from "../components/posts/AllPost";
 
-
-
-                    <div> 
-
-
-
-                    </div>
-                )
-
-
-
-
-            }
-            export default Posts
-
+const Posts = () => {
+  return (
+    <div>
+      <AllPost />
+    </div>
+  );
+};
+export default Posts;

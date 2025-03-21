@@ -65,7 +65,7 @@ const Sidebar = () => {
           </List>
         </Collapse>
 
-        <ListItemButton component={Link} to="/profile">
+        <ListItemButton component={Link} to="/post">
           <ListItemIcon><AccountCircle sx={{ color: "#fff" }} /></ListItemIcon>
           <ListItemText primary="Post " />
         </ListItemButton>
@@ -75,10 +75,7 @@ const Sidebar = () => {
           <ListItemText primary="Questions" />
         </ListItemButton>
 
-        <ListItemButton component={Link} to="/signup">
-          <ListItemIcon><AppRegistration sx={{ color: "#fff" }} /></ListItemIcon>
-          <ListItemText primary="Sign Up" />
-        </ListItemButton>
+      
       </List>
     </Drawer>
   );
