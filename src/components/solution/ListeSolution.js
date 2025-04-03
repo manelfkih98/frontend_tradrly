@@ -5,7 +5,7 @@ import {
   deleteSolutions,
   createSolution,
   updateSolution
-} from "../../services/solutionService";
+} from "../../store/services/solutionService";
 import {
   Table,
   TableHead,
@@ -162,13 +162,13 @@ function ListesSolution() {
                         onClick={() => handleEdit(project)}
                         color="primary"
                       >
-                        Modifier <EditIcon />
+                         <EditIcon />
                       </IconButton>
                       <IconButton
                         onClick={() => handleDelete(project._id)}
                         color="error"
                       >
-                        Supprimer <DeleteIcon />
+                         <DeleteIcon />
                       </IconButton>
                     </TableCell>
                   </TableRow>

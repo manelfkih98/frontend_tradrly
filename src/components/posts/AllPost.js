@@ -1,6 +1,7 @@
 import React, { useEffect } from "react";
-import { fetchPosts, refuser,accepter } from "../../services/postsService";
+import { fetchPosts, refuser,accepter } from "../../store/services/postsService";
 import { useDispatch, useSelector } from "react-redux";
+import {passrTest} from "../../store/services/QcmService"
 import {
   Table,
   TableHead,
@@ -30,7 +31,7 @@ const AllPost = () => {
   };
   const handleAccepter=(id)=>
   {
-    dispatch(accepter(id));
+    dispatch(passrTest(id));
   };
 
   return (
@@ -95,7 +96,7 @@ const AllPost = () => {
                         Refuser
                       </Button>
                 
-                      <Button onClick={()=>handleAccepter(post._id)}>Accpter</Button>
+                      <Button onClick={()=>handleAccepter(post._id)}>Passer un Test</Button>
                     </TableCell>
                   </TableRow>
                 ))

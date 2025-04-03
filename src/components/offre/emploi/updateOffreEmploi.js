@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
-import { updateOffreEmploi } from "../../../services/offreService";
-import { fetchDepartments } from "../../../services/departService";
+import { updateOffreEmploi } from "../../../store/services/offreService";
+import { fetchDepartments } from "../../../store/services/departService";
 import dayjs from "dayjs";
 
 import {

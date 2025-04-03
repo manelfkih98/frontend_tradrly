@@ -11,7 +11,7 @@ import {
 import { useForm } from "react-hook-form";
 import { useSelector, useDispatch } from "react-redux";
 
-import { fetchDepartments } from "../../services/departService";
+import { fetchDepartments } from "../../store/services/departService";
 function AddSolution({ open, handleClose, onSubmitSolution, editingSolution }) {
   
   const dispatch = useDispatch();

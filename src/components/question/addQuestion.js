@@ -1,8 +1,8 @@
 import React, { useState, useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
-import { fetchDepartments } from "../../services/departService"; // Action pour récupérer les départements
+import { fetchDepartments } from "../../store/services/departService"; // Action pour récupérer les départements
 import { Button, TextField, MenuItem, Select, InputLabel, FormControl, Grid, Typography, CircularProgress, Box } from "@mui/material";
-import { addQuestion, fetchQuestion } from "../../services/questionService"; // Action pour ajouter la question
+import { addQuestion, fetchQuestion } from "../../store/services/questionService"; // Action pour ajouter la question
 
 const AddQuestion = ({ onClose }) => {
   const dispatch = useDispatch();

@@ -1,8 +1,8 @@
 import React, { useState, useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
-import { createOffreStage } from "../../../services/offreService";
-import { fetchDepartments } from "../../../services/departService";
-import { createOffreJob } from "../../../services/offreService";
+import { createOffreStage } from "../../../store/services/offreService";
+import { fetchDepartments } from "../../../store/services/departService";
+import { createOffreJob } from "../../../store/services/offreService";
 import {
   Dialog,
   DialogTitle,

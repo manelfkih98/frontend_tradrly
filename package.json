@@ -21,6 +21,8 @@
     "react-redux": "^9.2.0",
     "react-router-dom": "^7.3.0",
     "react-scripts": "5.0.1",
+    "survey-core": "^2.0.3",
+    "survey-react-ui": "^2.0.3",
     "sweetalert2": "^11.17.2",
     "web-vitals": "^2.1.4",
     "yup": "^1.6.1"

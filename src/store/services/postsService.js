@@ -1,0 +1,72 @@
+import api from "../../config/api";
+import PATHS from "../../path/apiPath";
+import {
+  setPosts,
+  setLoading,
+  setError,
+  setDemandes,
+} from "../slices/postsSlice";
+
+export const fetchPosts = () => async (dispatch) => {
+  dispatch(setLoading());
+  try {
+    const response = await api.get(`${PATHS.POST.ALL_POST}`);
+    dispatch(setPosts(response.data));
+  } catch (error) {
+    dispatch(setError(error.message));
+  }
+};
+
+export const refuser = (id) => async (dispatch) => {
+  dispatch(setLoading());
+  try {
+    const response = await api.post(`${PATHS.POST.REFUSER_POST}/${id}`);
+    dispatch(fetchPosts());
+  } catch (error) {
+    dispatch(setError(error)); 
+  }
+};
+ export const refuserDemande=(id)=> async (dispatch) =>
+ {
+  dispatch(setLoading());
+  try{
+    const response = await api.post(`${PATHS.POST.REFUSER_DEMANDE}/${id}`);
+    dispatch(postWithoutOffre());
+  }catch(error){
+    dispatch(setError(error))
+  }
+
+
+
+
+ }
+
+
+
+
+export const accepter = (id) => async (dispatch) => {
+  try {
+    const response = await api.post(`${PATHS.POST.ACCEPTER_POST}/${id}`);
+  } catch (error) {
+    dispatch(setError(error));
+  }
+};
+
+export const accepterDemande = (id) => async (dispatch) => {
+  try {
+    const response = await api.post(`${PATHS.POST.ACCEPTER_DEMANDE}/${id}`);
+  } catch (error) {
+    dispatch(setError(error));
+  }
+};
+
+
+export const postWithoutOffre = () => async (dispatch) => {
+  dispatch(setLoading());
+  try {
+    const response = await api.get(`${PATHS.POST.DEMANDE}`);
+    dispatch(setDemandes(response.data));
+  } catch (error) {
+    dispatch(setError(error.message));
+  }
+};

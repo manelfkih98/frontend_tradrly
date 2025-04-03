@@ -29,7 +29,7 @@ const Sidebar = () => {
       </Box>
 
       <List>
-        <ListItemButton component={Link} to="/">
+        <ListItemButton component={Link} to="/dashboard">
           <ListItemIcon><Dashboard sx={{ color: "#fff" }} /></ListItemIcon>
           <ListItemText primary="Dashboard" />
         </ListItemButton>
@@ -44,7 +44,7 @@ const Sidebar = () => {
           <ListItemText primary="Projets" />
         </ListItemButton>
 
-        {/* Menu déroulant pour les offres */}
+       
         <ListItemButton onClick={() => setOpen(!open)}>
           <ListItemIcon><Notifications sx={{ color: "#fff" }} /></ListItemIcon>
           <ListItemText primary="Offres" />
@@ -74,6 +74,21 @@ const Sidebar = () => {
           <ListItemIcon><Login sx={{ color: "#fff" }} /></ListItemIcon>
           <ListItemText primary="Questions" />
         </ListItemButton>
+
+        <ListItemButton component={Link} to="/PostWithoutOffre">
+        <ListItemIcon><AccountCircle sx={{ color: "#fff" }} /></ListItemIcon>
+          <ListItemText primary="Demande d'offre " />
+        </ListItemButton>
+         
+
+         
+        <ListItemButton component={Link} to="/Qcm">
+        <ListItemIcon><AccountCircle sx={{ color: "#fff" }} /></ListItemIcon>
+          <ListItemText primary="Test " />
+        </ListItemButton>
+
+       
+
 
       
       </List>

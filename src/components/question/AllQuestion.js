@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
-import { fetchQuestion, deleteQuestion, updateQuestion } from "../../services/questionService";
-import { fetchDepartments } from "../../services/departService";
+import { fetchQuestion, deleteQuestion, updateQuestion } from "../../store/services/questionService";
+import { fetchDepartments } from "../../store/services/departService";
 import {
   Table,
   TableHead,

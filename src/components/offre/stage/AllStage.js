@@ -4,7 +4,7 @@ import {
   fetchOffresStage,
   deactivateOffreStage,
   activateOffreStage,
-} from "../../../services/offreService";
+} from "../../../store/services/offreService";
 
 import {
   Table,
@@ -128,7 +128,7 @@ const AllStage = () => {
                           setEditOpen(true);
                         }}
                       >
-                        Modifier <EditIcon />
+                         <EditIcon />
                         </IconButton>
                         <Button
                         variant="contained"

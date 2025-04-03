@@ -4,7 +4,7 @@ import {
   fetchOffresEmploi,
   deactivateOffreEmploi,
   activateOffreEmploi
-} from "../../../services/offreService";
+} from "../../../store/services/offreService";
 import {
   Table,
   TableHead,
@@ -139,7 +139,7 @@ function AllEmploi() {
                           setEditOpen(true);
                         }}
                       >
-                        Modifier <EditIcon />
+                         <EditIcon />
                       </IconButton>
                       <Button
                         variant="contained"

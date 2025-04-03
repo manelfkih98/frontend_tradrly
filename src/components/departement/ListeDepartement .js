@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
-import { fetchDepartments, deleteDepartments, createDepartment, updateDepartment } from "../../services/departService";
+import { fetchDepartments, deleteDepartments, createDepartment, updateDepartment } from "../../store/services/departService";
 import { Table, TableHead, TableBody, TableRow, TableCell, TableContainer, Paper, CircularProgress, Typography, Card, IconButton, Button, TextField } from "@mui/material";
 import DeleteIcon from "@mui/icons-material/Delete";
 import EditIcon from "@mui/icons-material/Edit";
@@ -112,10 +112,10 @@ function ListesDepartement() {
                     <TableCell>{dep.DescrpDetp}</TableCell>
                     <TableCell>
                       <IconButton onClick={() => handleEdit(dep)} color="primary">
-                        Modifier <EditIcon />
+                         <EditIcon />
                       </IconButton>
                       <IconButton onClick={() => handleDelete(dep._id)} color="error">
-                        Supprimer <DeleteIcon />
+                         <DeleteIcon />
                       </IconButton>
                     </TableCell>
                   </TableRow>

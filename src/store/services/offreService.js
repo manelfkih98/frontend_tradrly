@@ -1,11 +1,13 @@
 // src/services/offreService.js
-import api from "../config/api";
+import api from "../../config/api";
+import PATHS from "../../path/apiPath";
+
 import { setOffres, setLoading, setError } from "../slices/offreSlice";
 
 export const fetchOffresStage = () => async (dispatch) => {
   dispatch(setLoading());
   try {
-    const response = await api.get("offre/offreByStage");
+    const response = await api.get(PATHS.OFFRE.ALL_STAGE);
     dispatch(setOffres(response.data));
   } catch (error) {
     dispatch(setError(error.message));
@@ -14,7 +16,7 @@ export const fetchOffresStage = () => async (dispatch) => {
 export const fetchOffresEmploi = () => async (dispatch) => {
   dispatch(setLoading());
   try {
-    const response = await api.get("offre/offreByJob");
+    const response = await api.get(PATHS.OFFRE.ALL_JOB);
     dispatch(setOffres(response.data));
   } catch (error) {
     dispatch(setError(error.message));
@@ -23,7 +25,7 @@ export const fetchOffresEmploi = () => async (dispatch) => {
 export const createOffreStage = (offre) => async (dispatch) => {
   dispatch(setLoading());
   try {
-    const response = await api.post("offre/addOffreStage", offre);
+    const response = await api.post(PATHS.OFFRE.ADD_STAGE, offre);
     dispatch(fetchOffresStage());
   } catch (error) {
     dispatch(setError(error.message));
@@ -32,7 +34,7 @@ export const createOffreStage = (offre) => async (dispatch) => {
 export const createOffreJob = (offre) => async (dispatch) => {
   dispatch(setLoading());
   try {
-    const response = await api.post("offre/addOffreJob", offre);
+    const response = await api.post(PATHS.OFFRE.ADD_JOB, offre);
     dispatch(fetchOffresEmploi());
   } catch (error) {
     dispatch(setError(error.message));
@@ -41,7 +43,7 @@ export const createOffreJob = (offre) => async (dispatch) => {
 export const updateOffreStage = (id, offre) => async (dispatch) => {
   dispatch(setLoading());
   try {
-    const response = await api.put(`offre/update/${id}`, offre);
+    const response = await api.put(`${PATHS.OFFRE.UPDATE_OFFRE_STAGE}/${id}`, offre);
     dispatch(fetchOffresStage());
   } catch (error) {
     dispatch(setError(error.message));
@@ -50,7 +52,7 @@ export const updateOffreStage = (id, offre) => async (dispatch) => {
 export const updateOffreEmploi = (id, offre) => async (dispatch) => {
   dispatch(setLoading());
   try {
-    const response = await api.put(`offre/update/${id}`, offre);
+    const response = await api.put(`${PATHS.OFFRE.UPDATE_OFFRE_STAGE}/${id}`, offre);
     dispatch(fetchOffresEmploi());
   } catch (error) {
     dispatch(setError(error.message));
@@ -60,7 +62,7 @@ export const updateOffreEmploi = (id, offre) => async (dispatch) => {
 export const deactivateOffreStage = (id) => async (dispatch) => {
   dispatch(setLoading());
   try {
-    const response = await api.put(`offre/deactivateOffre/${id}`);
+    const response = await api.put(`${PATHS.OFFRE.DEACTIVE_OFFRE}/${id}`);
     dispatch(fetchOffresStage());
   } catch (error) {
     dispatch(setError(error.message));
@@ -69,7 +71,7 @@ export const deactivateOffreStage = (id) => async (dispatch) => {
 export const deactivateOffreEmploi = (id) => async (dispatch) => {
   dispatch(setLoading());
   try {
-    const response = await api.put(`offre/deactivateOffre/${id}`);
+    const response = await api.put(`${PATHS.OFFRE.DEACTIVE_OFFRE}/${id}`);
     dispatch(fetchOffresEmploi());
   } catch (error) {
     dispatch(setError(error.message));
@@ -78,7 +80,7 @@ export const deactivateOffreEmploi = (id) => async (dispatch) => {
 export const activateOffreEmploi = (id) => async (dispatch) => {
   dispatch(setLoading());
   try {
-    const response = await api.put(`offre/activateOffre/${id}`);
+    const response = await api.put(`${PATHS.OFFRE.ACTIVE_OFFRE}/${id}`);
     dispatch(fetchOffresEmploi());
   } catch (error) {
     dispatch(setError(error.message));
@@ -88,7 +90,7 @@ export const activateOffreEmploi = (id) => async (dispatch) => {
 export const activateOffreStage = (id) => async (dispatch) => {
   dispatch(setLoading());
   try {
-    const response = await api.put(`offre/activateOffre/${id}`);
+    const response = await api.put(`${PATHS.OFFRE.ACTIVE_OFFRE}/${id}`);
     dispatch(fetchOffresStage());
   } catch (error) {
     dispatch(setError(error.message));
